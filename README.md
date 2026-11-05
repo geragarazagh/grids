@@ -1,6 +1,10 @@
+<img src="docs/icon.png" width="128" alt="Grids icon">
+
 # Grids
 
 A fixed grid over the whole screen.
+
+![Grids on a Mac screen](docs/screenshot.png)
 
 Apple silicon, macOS 13 or later.
 
