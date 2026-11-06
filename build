@@ -2,7 +2,7 @@
 # Builds Grids.app and Grids.zip in this folder. Needs Xcode Command Line Tools.
 set -e
 cd "${0:A:h}"
-version=1.0.0 min=13.0 id=com.geragaraza.grids app=Grids.app
+version=1.1 min=13.0 id=com.geragaraza.grids app=Grids.app
 tmp=$(mktemp -d); trap 'rm -rf $tmp' EXIT
 rm -rf $app Grids.zip
 mkdir -p $app/Contents/MacOS $app/Contents/Resources
@@ -36,8 +36,9 @@ cat > $app/Contents/Info.plist <<PLIST
 </dict></plist>
 PLIST
 
-# Ad hoc signature: Apple silicon runs nothing unsigned, and this one needs no Apple account.
-codesign -f -s - --identifier $id $app
+# Ad hoc unless SIGN_ID names a Developer ID certificate: Apple silicon runs nothing unsigned, and that needs no Apple account. Hardened runtime and a timestamp are what notarisation asks for.
+sign=${SIGN_ID:--}; stamp=(); [ "$sign" = - ] || stamp=(--timestamp)
+codesign -f -s "$sign" $stamp --options runtime --identifier $id $app
 # ditto, not zip: it is Apple's tool for bundles and keeps the signature intact.
 ditto -c -k --keepParent $app Grids.zip
 echo Done
