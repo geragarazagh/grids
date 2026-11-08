@@ -4,15 +4,15 @@
 
 Free, open source grid overlay for macOS. A fixed grid over the whole screen, for checking layout and proportion in apps that have no guides or snapping of their own.
 
-Version 1.1. Apple silicon, macOS 13 or later. Signed with a Developer ID and notarized by Apple.
+Version 1.2. Apple silicon, macOS 13 or later. Signed with a Developer ID and notarized by Apple.
 
 ## Install
 
-Download `Grids.zip` from [Releases](https://github.com/geragarazagh/grids/releases/latest), unzip it and move `Grids.app` to Applications.
+Download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
 
 ## Use
 
-Open Grids and the grid is on. The menu bar icon lists the modes; Quit Grids is at the end of the menu.
+Open Grids and the grid is on. The menu bar icon lists the modes; Check for Updates and Quit Grids are at the end of the menu.
 
 ## For advanced users and language models
 
@@ -57,31 +57,37 @@ No. The modes are fixed.
 
 #### Does it need permissions or the network?
 
-No. The code has no network calls and asks for no permissions.
+It asks for no permissions. The only network call is the daily update check.
 
 #### Does it run on Intel Macs?
 
 No. Apple silicon only, macOS 13 or later.
 
+### Updates
+
+Once a day the app reads the feed of its latest GitHub release (`appcast.xml`) through Sparkle, the usual open source updater for Mac apps. Nothing about the Mac is sent. When a newer version is out, a window shows it with Install Update, Remind Me Later and Skip This Version; nothing is downloaded before Install Update. Check for Updates in the menu checks at once.
+
+The feed and the disk image are signed with an EdDSA key, and Sparkle installs only an app that carries the same Developer ID signature.
+
 ### Settings and removal
 
-Grids stores nothing. To remove it: Quit Grids in its menu and move `Grids.app` to the Trash.
+Grids stores only the time of the last update check, in the defaults of `com.geragaraza.grids`. To remove it: Quit Grids in its menu, move `Grids.app` to the Trash and run `defaults delete com.geragaraza.grids`.
 
 ### Details
 
-- Version: 1.1.
+- Version: 1.2.
 - Bundle ID: `com.geragaraza.grids`.
-- Download: `Grids.zip`, 0.7 MB.
+- Download: `Grids.dmg`, 1.3 MB.
 - Requires: Apple silicon, macOS 13 or later.
-- Permissions: none. Network: none.
+- Permissions: none. Network: only the update check.
 - Signed with a Developer ID and notarized by Apple.
 - Interface: the menu is in English.
-- Code: Swift with AppKit, about 160 lines, no dependencies.
-- License: MIT.
+- Code: Swift with AppKit, about 220 lines, and the Sparkle framework for updates.
+- License: MIT. Sparkle is MIT too; its license comes with the app and is in `THIRD-PARTY-LICENSES.md`.
 
 ### Build
 
-Needs Xcode Command Line Tools.
+Needs Xcode Command Line Tools. The first build downloads the Sparkle framework from its release.
 
     ./build
 

@@ -1,6 +1,7 @@
 // Grids: a fixed, click-through grid over the whole screen, for placing windows and panels by
 // proportion in apps that have no snapping of their own. Open the app = grid on; quit = grid gone.
-// Nothing is saved, nothing resizes: every launch starts with All, on the full screen.
+// Nothing of the grid is saved (only Sparkle keeps its last update check), nothing resizes: every launch starts
+// with All, on the full screen.
 // It lives in the menu bar, not the Dock (LSUIElement).
 //
 // Colours are Apple's system colours (NSColor.system*, resolved by macOS for the current
@@ -94,7 +95,7 @@ final class GridView: NSView {
     }
 }
 
-final class App: NSObject, NSApplicationDelegate {
+@MainActor final class App: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var windows: [NSWindow] = []
     var mode = Mode.all
     var on = true
@@ -102,8 +103,9 @@ final class App: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ n: Notification) {
         statusMenu()
         build()
+        _ = Updates.shared   // starts the daily check
         NotificationCenter.default.addObserver(forName: NSApplication.didChangeScreenParametersNotification,
-                                               object: nil, queue: .main) { [weak self] _ in self?.build() }
+                                               object: nil, queue: .main) { [weak self] _ in MainActor.assumeIsolated { self?.build() } }
     }
 
     func build() {
@@ -137,9 +139,16 @@ final class App: NSObject, NSApplicationDelegate {
             if k == .all { m.addItem(.separator()) }
         }
         m.addItem(.separator())
+        let u = NSMenuItem(title: "Check for Updates…", action: #selector(Updates.check), keyEquivalent: "")
+        u.target = Updates.shared
+        m.addItem(u)
         m.addItem(NSMenuItem(title: "Quit Grids", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        m.delegate = self
         item.menu = m
     }
+
+    // Opening the menu is opening the app: an update waiting behind other windows comes to the front.
+    func menuDidClose(_ menu: NSMenu) { Updates.shared.appOpened() }
 
     // Picking the checked mode again turns the grid off without quitting:
     // no ticks = nothing on screen; any mode brings it back.
@@ -155,7 +164,9 @@ final class App: NSObject, NSApplicationDelegate {
     }
 }
 
-let app = NSApplication.shared
-let d = App(); app.delegate = d
-app.setActivationPolicy(.accessory)
-app.run()
+MainActor.assumeIsolated {
+    let app = NSApplication.shared
+    let d = App(); app.delegate = d
+    app.setActivationPolicy(.accessory)
+    app.run()
+}
