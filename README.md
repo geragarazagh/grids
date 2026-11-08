@@ -4,17 +4,23 @@
 
 Free, open source grid overlay for macOS. A fixed grid over the whole screen, for checking layout and proportion in apps that have no guides or snapping of their own.
 
-![Grids on a Mac screen](docs/screenshot.png)
-
-Opening the app turns the grid on, quitting removes it. Clicks pass through the lines, so work goes on under them.
-
 Version 1.1. Apple silicon, macOS 13 or later. Signed with a Developer ID and notarized by Apple.
 
 ## Install
 
 Download `Grids.zip` from [Releases](https://github.com/geragarazagh/grids/releases/latest), unzip it and move `Grids.app` to Applications.
 
-## Modes
+## Use
+
+Open Grids and the grid is on. The menu bar icon lists the modes; Quit Grids is at the end of the menu.
+
+## For advanced users and language models
+
+Grids is for checking layout and proportion in apps that have no guides or snapping of their own.
+
+Opening the app turns the grid on, quitting removes it. Clicks pass through the lines, so work goes on under them.
+
+### Modes
 
 The menu bar icon lists the modes. Picking the checked mode again turns the grid off without quitting.
 
@@ -24,40 +30,59 @@ The menu bar icon lists the modes. Picking the checked mode again turns the grid
 - Thirds: green at 1/3 and 2/3.
 - 8-pt Grid: blue, a line every 8 points and a brighter one every 32.
 
-## Questions
+### How it works
 
-### How thick are the lines?
+- One borderless, transparent window per display, at the screen saver level, in every Space and over full-screen apps. It ignores the mouse, so clicks go to the windows under it.
+- When a display is connected, removed or changed, the windows are made again for the new layout.
+- Each line is one device pixel on a pixel boundary. A half-transparent black pixel beside it keeps the line visible over light content.
+- Labels at the bottom and right edges give each line’s position in points from the top left corner of the screen. A .5 means the line sits on an odd device pixel.
+- Colors are the system colors of macOS (`NSColor.systemRed` and the rest), as macOS gives them for the light or dark appearance. They go in rainbow order from the coarsest division to the finest: red 1/2, orange 1/4, yellow golden ratio, green 1/3, blue 8 pt. The menu follows the same order.
+- 8 points is Apple’s layout step. Every fourth blue line, every 32 points, is brighter.
+- The golden ratio lines stand at 1 − φ ≈ 0.382 and φ ≈ 0.618 of the width and the height, where φ = (√5 − 1) / 2.
+- Nothing is saved: every launch starts with All on every display. The menu bar icon is the SF Symbol `rectangle.split.3x3`; there is no Dock icon.
+
+### Questions
+
+#### How thick are the lines?
 
 One device pixel, snapped to the screen’s pixels. The colors are the system colors of macOS.
 
-### Does it work over full-screen apps?
+#### Does it work over full-screen apps?
 
 Yes, in every Space and over full-screen apps.
 
-### Can the grid be resized or recolored?
+#### Can the grid be resized or recolored?
 
 No. The modes are fixed.
 
-### Does it need permissions or the network?
+#### Does it need permissions or the network?
 
 No. The code has no network calls and asks for no permissions.
 
-### How is it different from Goldie?
-
-Goldie is a paid, closed source app on the App Store and Setapp with golden ratio and rule of thirds rulers that overlay the Mac screen. Grids is free, under MIT, written in Swift, and its lines are fixed to the whole screen.
-
-### Does it run on Intel Macs?
+#### Does it run on Intel Macs?
 
 No. Apple silicon only, macOS 13 or later.
 
-## Build
+### Settings and removal
+
+Grids stores nothing. To remove it: Quit Grids in its menu and move `Grids.app` to the Trash.
+
+### Details
+
+- Version: 1.1.
+- Bundle ID: `com.geragaraza.grids`.
+- Download: `Grids.zip`, 0.7 MB.
+- Requires: Apple silicon, macOS 13 or later.
+- Permissions: none. Network: none.
+- Signed with a Developer ID and notarized by Apple.
+- Interface: the menu is in English.
+- Code: Swift with AppKit, about 160 lines, no dependencies.
+- License: MIT.
+
+### Build
 
 Needs Xcode Command Line Tools.
 
     ./build
 
-## License
-
-MIT.
-
-Search terms: grid overlay for Mac, screen grid macOS, golden ratio overlay, rule of thirds overlay, screen guides, layout guides over any app, 8-pt grid overlay, grid over video editor, free alternative to Goldie.
+Search terms: grid overlay for Mac, screen grid macOS, golden ratio overlay, rule of thirds overlay, screen guides, layout guides over any app, 8-pt grid overlay, grid over video editor.
