@@ -8,7 +8,13 @@ Version 1.2. Apple silicon, macOS 13 or later. Signed with a Developer ID and no
 
 ## Install
 
-Download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
+With [Homebrew](https://brew.sh):
+
+```sh
+brew install geragarazagh/tap/grids
+```
+
+Or download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
 
 ## Use
 
@@ -72,6 +78,8 @@ The feed and the disk image are signed with an EdDSA key, and Sparkle installs o
 ### Settings and removal
 
 Grids stores only the time of the last update check, in the defaults of `com.geragaraza.grids`. To remove it: Quit Grids in its menu, move `Grids.app` to the Trash and run `defaults delete com.geragaraza.grids`.
+
+Installed with Homebrew, `brew uninstall --zap grids` quits it and removes the app and its settings.
 
 ### Details
 
