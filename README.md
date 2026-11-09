@@ -1,20 +1,22 @@
-<img src="docs/icon.png" width="128" alt="Grids icon">
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/icon-dark.png"><img src="docs/icon.png" width="128" alt="Grids icon"></picture>
 
 # Grids: screen grid overlay for Mac
 
 Free, open source grid overlay for macOS. A fixed grid over the whole screen, for checking layout and proportion in apps that have no guides or snapping of their own.
 
-Version 1.2. Apple silicon, macOS 13 or later. Signed with a Developer ID and notarized by Apple.
+Version 1.3. Apple silicon, macOS 13 or later. Interface in English, Ukrainian and Russian. Signed with a Developer ID and notarized by Apple.
+
+![Grids in use: Halves and Quarters over the Earthrise photo of Apollo 8, the lunar horizon on the lower quarter line, Earth on the upper one, the Grids menu open, dark appearance](docs/scene.webp)
 
 ## Install
 
-With [Homebrew](https://brew.sh):
+Download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
+
+Or with [Homebrew](https://brew.sh):
 
 ```sh
 brew install geragarazagh/tap/grids
 ```
-
-Or download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
 
 ## Use
 
@@ -83,19 +85,19 @@ Installed with Homebrew, `brew uninstall --zap grids` quits it and removes the a
 
 ### Details
 
-- Version: 1.2.
+- Version: 1.3.
 - Bundle ID: `com.geragaraza.grids`.
-- Download: `Grids.dmg`, 1.3 MB.
+- Download: `Grids.dmg`, 1.9 MB.
 - Requires: Apple silicon, macOS 13 or later.
 - Permissions: none. Network: only the update check.
 - Signed with a Developer ID and notarized by Apple.
-- Interface: the menu is in English.
+- Interface: English, Ukrainian, Russian, from the language of macOS.
 - Code: Swift with AppKit, about 220 lines, and the Sparkle framework for updates.
 - License: MIT. Sparkle is MIT too; its license comes with the app and is in `THIRD-PARTY-LICENSES.md`.
 
 ### Build
 
-Needs Xcode Command Line Tools. The first build downloads the Sparkle framework from its release.
+Needs Xcode 26 or later in Applications: the Swift compiler, and actool with Icon Composer for the light and dark icon. The first build downloads the Sparkle framework from its release.
 
     ./build
 

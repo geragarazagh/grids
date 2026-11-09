@@ -14,15 +14,19 @@
 
 import AppKit
 
+// The English text is the key; ru and uk come from lang/, picked by macOS from the system language.
+// Terms as macOS and the site name them (Quit, Check for Updates… read from macOS's own .loctable files).
+func L(_ s: String) -> String { NSLocalizedString(s, comment: "") }
+
 enum Mode: Int, CaseIterable {
     case all, halves, golden, thirds, fine
     var title: String {
         switch self {
-        case .all: return "All"
-        case .halves: return "Halves & Quarters"
-        case .golden: return "Golden Ratio"
-        case .thirds: return "Thirds"
-        case .fine: return "8-pt Grid"
+        case .all: return L("All")
+        case .halves: return L("Halves & Quarters")
+        case .golden: return L("Golden Ratio")
+        case .thirds: return L("Thirds")
+        case .fine: return L("8-pt Grid")
         }
     }
 }
@@ -139,10 +143,10 @@ final class GridView: NSView {
             if k == .all { m.addItem(.separator()) }
         }
         m.addItem(.separator())
-        let u = NSMenuItem(title: "Check for Updates…", action: #selector(Updates.check), keyEquivalent: "")
+        let u = NSMenuItem(title: L("Check for Updates…"), action: #selector(Updates.check), keyEquivalent: "")
         u.target = Updates.shared
         m.addItem(u)
-        m.addItem(NSMenuItem(title: "Quit Grids", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        m.addItem(NSMenuItem(title: L("Quit Grids"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         m.delegate = self
         item.menu = m
     }
