@@ -4,7 +4,7 @@
 
 Free, open source grid overlay for macOS. A fixed grid over the whole screen, for checking layout and proportion in apps that have no guides or snapping of their own.
 
-Version 1.3. Apple silicon, macOS 13 or later. Interface in English, Ukrainian and Russian. Signed with a Developer ID and notarized by Apple.
+Apple silicon, macOS 13 or later. Interface in English, Ukrainian and Russian. Signed with a Developer ID and notarized by Apple.
 
 ![Grids in use: Halves and Quarters over the Earthrise photo of Apollo 8, the lunar horizon on the lower quarter line, Earth on the upper one, the Grids menu open, dark appearance](docs/scene.webp)
 
@@ -51,14 +51,6 @@ The menu bar icon lists the modes. Picking the checked mode again turns the grid
 
 ### Questions
 
-#### How thick are the lines?
-
-One device pixel, snapped to the screen’s pixels. The colors are the system colors of macOS.
-
-#### Does it work over full-screen apps?
-
-Yes, in every Space and over full-screen apps.
-
 #### Can the grid be resized or recolored?
 
 No. The modes are fixed.
@@ -73,7 +65,7 @@ No. Apple silicon only, macOS 13 or later.
 
 ### Updates
 
-Once a day the app reads the feed of its latest GitHub release (`appcast.xml`) through Sparkle, the usual open source updater for Mac apps. Nothing about the Mac is sent. When a newer version is out, a window shows it with Install Update, Remind Me Later and Skip This Version; nothing is downloaded before Install Update. Check for Updates in the menu checks at once.
+Once a day the app reads the feed of its latest GitHub release (`appcast.xml`) through Sparkle. Nothing about the Mac is sent. When a newer version is out, a window shows it with Install Update, Remind Me Later and Skip This Version; nothing is downloaded before Install Update. Check for Updates in the menu checks at once.
 
 The feed and the disk image are signed with an EdDSA key, and Sparkle installs only an app that carries the same Developer ID signature.
 
