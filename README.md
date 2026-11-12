@@ -10,7 +10,7 @@ Apple silicon, macOS 13 or later. Interface in English, Ukrainian and Russian. S
 
 ## Install
 
-Download `Grids.dmg` from [Releases](https://github.com/geragarazagh/grids/releases/latest), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
+**Mac** (Apple silicon, macOS 13 or later): download [`Grids.dmg`](https://github.com/geragarazagh/grids/releases/latest/download/Grids.dmg) (1.9 MB), open it and drag `Grids.app` to Applications. Later versions arrive through Check for Updates.
 
 Or with [Homebrew](https://brew.sh):
 
