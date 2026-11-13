@@ -73,9 +73,17 @@ Grids потрібен, щоб перевіряти композицію та п
 
 ### Налаштування та видалення
 
-Grids зберігає лише час останньої перевірки оновлень, у defaults `com.geragaraza.grids`. Щоб видалити: вихід через його меню, `Grids.app` у Кошик і `defaults delete com.geragaraza.grids`.
+Grids зберігає лише час останньої перевірки оновлень, у defaults `com.geragaraza.grids`. Щоб видалити: «Завершити Grids» у його меню, `Grids.app` у Кошик і стерти налаштування командою:
 
-Якщо ставили через Homebrew, `brew uninstall --zap grids` закриває його й видаляє застосунок разом із налаштуваннями.
+```sh
+defaults delete com.geragaraza.grids
+```
+
+Якщо ставили через Homebrew, ця команда закриває його й видаляє застосунок разом із налаштуваннями:
+
+```sh
+brew uninstall --zap grids
+```
 
 ### Подробиці
 

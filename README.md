@@ -73,9 +73,17 @@ The feed and the disk image are signed with an EdDSA key, and Sparkle installs o
 
 ### Settings and removal
 
-Grids stores only the time of the last update check, in the defaults of `com.geragaraza.grids`. To remove it: Quit Grids in its menu, move `Grids.app` to the Trash and run `defaults delete com.geragaraza.grids`.
+Grids stores only the time of the last update check, in the defaults of `com.geragaraza.grids`. To remove it: Quit Grids in its menu, move `Grids.app` to the Trash and clear its settings with this command:
 
-Installed with Homebrew, `brew uninstall --zap grids` quits it and removes the app and its settings.
+```sh
+defaults delete com.geragaraza.grids
+```
+
+Installed with Homebrew, this command quits it and removes the app and its settings:
+
+```sh
+brew uninstall --zap grids
+```
 
 ### Details
 
