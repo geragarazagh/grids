@@ -14,7 +14,7 @@
 
 import AppKit
 
-// The English text is the key; ru and uk come from lang/, picked by macOS from the system language.
+// The interface is in English only (2026-11-15; ru and uk from 2026-11-08 to then): L() returns its English key.
 // Terms as macOS and the site name them (Quit, Check for Updates… read from macOS's own .loctable files).
 func L(_ s: String) -> String { NSLocalizedString(s, comment: "") }
 
