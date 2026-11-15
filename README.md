@@ -1,12 +1,10 @@
-English · [Українська](README_UA.md) · [Русский](README_RU.md)
-
 <picture><source media="(prefers-color-scheme: dark)" srcset="docs/icon-dark.png"><img src="docs/icon.png" width="128" alt="Grids icon"></picture>
 
 # Grids: screen grid overlay for Mac
 
 Free, open source grid overlay for macOS. A fixed grid over the whole screen, for checking layout and proportion in apps that have no guides or snapping of their own.
 
-Apple silicon, macOS 13 or later. Interface in English, Ukrainian and Russian. Signed with a Developer ID and notarized by Apple.
+Apple silicon, macOS 13 or later. Signed with a Developer ID and notarized by Apple.
 
 ![Grids in use: Halves and Quarters over the Earthrise photo of Apollo 8, the lunar horizon on the lower quarter line, Earth on the upper one, the Grids menu open, dark appearance](docs/scene.webp)
 
@@ -93,7 +91,6 @@ brew uninstall --zap grids
 - Requires: Apple silicon, macOS 13 or later.
 - Permissions: none. Network: only the update check.
 - Signed with a Developer ID and notarized by Apple.
-- Interface: English, Ukrainian, Russian, from the language of macOS.
 - Code: Swift with AppKit, about 220 lines, and the Sparkle framework for updates.
 - License: MIT. Sparkle is MIT too; its license comes with the app and is in `THIRD-PARTY-LICENSES.md`.
 
