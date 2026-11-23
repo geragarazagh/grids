@@ -103,6 +103,7 @@ final class GridView: NSView {
     var windows: [NSWindow] = []
     var mode = Mode.all
     var on = true
+    let control = GridsControl()
 
     func applicationDidFinishLaunching(_ n: Notification) {
         statusMenu()
@@ -110,6 +111,31 @@ final class GridView: NSView {
         _ = Updates.shared   // starts the daily check
         NotificationCenter.default.addObserver(forName: NSApplication.didChangeScreenParametersNotification,
                                                object: nil, queue: .main) { [weak self] _ in MainActor.assumeIsolated { self?.build() } }
+        control.handle = { [weak self] cmd in self?.handleControl(cmd) ?? "Grids is not ready." }
+        control.start()
+    }
+
+    func applicationWillTerminate(_ n: Notification) { control.stop() }
+
+    func applyState() {
+        windows.forEach {
+            ($0.contentView as? GridView)?.mode = mode
+            if on { $0.orderFrontRegardless() } else { $0.orderOut(nil) }
+        }
+        item.menu?.items.forEach { if $0.action == #selector(pick(_:)) { $0.state = on && $0.tag == mode.rawValue ? .on : .off } }
+    }
+
+    func handleControl(_ cmd: String) -> String {
+        let parts = cmd.split(separator: " ").map(String.init)
+        switch parts.first {
+        case "status": return "ok \(on ? "on" : "off") \(modeSlug(mode))"
+        case "hide": on = false; applyState(); return "ok"
+        case "toggle": on.toggle(); applyState(); return "ok \(on ? "Shown: \(modeSlug(mode))" : "Hidden.")"
+        case "show":
+            if parts.count > 1, let m = modeFromSlug(parts[1]) { mode = m }
+            on = true; applyState(); return "ok Shown: \(modeSlug(mode))"
+        default: return "Unknown command."
+        }
     }
 
     func build() {
@@ -169,6 +195,7 @@ final class GridView: NSView {
 }
 
 MainActor.assumeIsolated {
+    _ = runGridsCLI(CommandLine.arguments)
     let app = NSApplication.shared
     let d = App(); app.delegate = d
     app.setActivationPolicy(.accessory)
