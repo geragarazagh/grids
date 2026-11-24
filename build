@@ -4,7 +4,7 @@
 # Developer ID signed releases).
 set -e
 cd "${0:A:h}"
-version=1.3 min=13.0 id=com.geragaraza.grids app=Grids.app
+version=1.4 min=13.0 id=com.geragaraza.grids app=Grids.app
 xc=${XCODE_CONTENTS:-/Applications/Xcode.app/Contents}
 has_xcode=0; [ -d "$xc/Developer" ] && [ -x "$xc/Applications/Icon Composer.app/Contents/Executables/ictool" ] && has_xcode=1
 if [ -n "${SIGN_ID:-}" ] && [ "$SIGN_ID" != - ] && [ $has_xcode -eq 0 ]; then
