@@ -11,14 +11,15 @@ Queries exact proportion coordinates and controls the running Grids overlay from
 
 ## Locate the CLI
 
-Check in order; use the first that exits 0:
+Check in order; use the first that exits 0. Use `--help`, never `--version`, and read the app's version from its Info.plist before running its binary: Grids before 1.4 has no command line at all, so it takes every flag (`--help` and `--version` alike) as a plain start and opens its window instead of failing.
 
 ```sh
-grids-cli --version
-/Applications/Grids.app/Contents/MacOS/Grids --version
+grids-cli --help
+defaults read /Applications/Grids.app/Contents/Info CFBundleShortVersionString
+/Applications/Grids.app/Contents/MacOS/Grids --help
 ```
 
-If neither exists, tell the user how to install it (`brew install geragarazagh/tap/grids`) and stop.
+`grids-cli` exists only in versions that have the command line, so it is safe to try first. Run the third line only if the second prints 1.4 or newer; if it prints an older version, tell the user once to update Grids (Check for Updates in its menu, or `brew upgrade --cask geragarazagh/tap/grids`) and stop. If none works, tell the user how to install it (`brew install geragarazagh/tap/grids`) and stop.
 
 ## Common tasks
 
